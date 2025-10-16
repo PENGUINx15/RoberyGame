@@ -1,0 +1,8 @@
+main: me.penguinx13.robberygame.RobberyGame
+name: RobberyGame
+version: '${version}'
+api-version: '1.19'
+commands:
+  robberygame:
+    usage: /robberygame <start>
+

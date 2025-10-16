@@ -1,0 +1,63 @@
+RobberyLocation:
+  world: world
+  minX: 1181
+  minY: 106
+  minZ: 1018
+  maxX: 1189
+  maxY: 112
+  maxZ: 1026
+RobberyTPLocation:
+  Start:
+    world: world
+    X: 1182
+    Y: 107
+    Z: 1025
+  Win:
+    world: world
+    X: 1131
+    Y: 73
+    Z: 988
+  Lose:
+    world: world
+    X: -10
+    Y: 10
+    Z: -10
+CurrencyMin: 500
+CurrencyMax: 2000
+
+Blocks:
+  Material: DIAMOND_BLOCK
+  Amount: 8
+  LocationSpawn:
+    '1':
+      X: 1182
+      Y: 107
+      Z: 1023
+    '2':
+      X: 1183
+      Y: 107
+      Z: 1021
+    '3':
+      X: 1182
+      Y: 109
+      Z: 1019
+    '4':
+      X: 1185
+      Y: 107
+      Z: 1019
+    '5':
+      X: 1187
+      Y: 107
+      Z: 1022
+    '6':
+      X: 1188
+      Y: 108
+      Z: 1022
+    '7':
+      X: 1188
+      Y: 109
+      Z: 1025
+    '8':
+      X: 1188
+      Y: 109
+      Z: 1019
