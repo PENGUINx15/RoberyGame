@@ -1,13 +1,13 @@
 package me.penguinx13.robberygame.command;
 
 import me.penguinx13.robberygame.service.RobberyService;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import me.penguinx13.wapi.commands.annotations.RootCommand;
+import me.penguinx13.wapi.commands.annotations.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
-public final class RobberyCommand implements CommandExecutor {
+@RootCommand("robberygame")
+public final class RobberyCommand {
 
     private final RobberyService robberyService;
 
@@ -15,24 +15,20 @@ public final class RobberyCommand implements CommandExecutor {
         this.robberyService = robberyService;
     }
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (args.length == 0 || !args[0].equalsIgnoreCase("start")) {
-            sender.sendMessage("§eИспользование: /" + label + " start");
-            return true;
-        }
-
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage("Эту команду могут использовать только игроки.");
-            return true;
-        }
-
+    @SubCommand(value = "start", playerOnly = true, description = "Начать ограбление")
+    public void start(Player player) {
         if (!robberyService.start(player)) {
-            sender.sendMessage("Подождите, сейчас идет ограбление!");
-            return true;
+            player.sendMessage("Подождите, сейчас идет ограбление!");
+            return;
         }
 
-        sender.sendMessage("Ограбление началось!");
-        return true;
+        player.sendMessage("Ограбление началось!");
+    }
+
+    @SubCommand(value = "help", description = "Показать помощь по командам ограбления")
+    public void help(CommandSender sender) {
+        sender.sendMessage("§6Доступные команды /robberygame:");
+        sender.sendMessage(" §e/robberygame start §7- начать ограбление");
+        sender.sendMessage(" §e/robberygame help §7- показать это меню");
     }
 }

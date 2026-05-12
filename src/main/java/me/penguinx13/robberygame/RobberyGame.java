@@ -1,6 +1,7 @@
 package me.penguinx13.robberygame;
 
 import me.penguinx13.robberygame.command.RobberyCommand;
+import me.penguinx13.robberygame.command.WapiCommandRegistry;
 import me.penguinx13.robberygame.config.RobberySettings;
 import me.penguinx13.robberygame.listener.BlockBreakListener;
 import me.penguinx13.robberygame.service.BlockSpawner;
@@ -8,12 +9,12 @@ import me.penguinx13.robberygame.service.InventoryService;
 import me.penguinx13.robberygame.service.RewardService;
 import me.penguinx13.robberygame.service.RobberyService;
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RobberyGame extends JavaPlugin {
 
     private RobberyService robberyService;
+    private WapiCommandRegistry commandRegistry;
 
     @Override
     public void onEnable() {
@@ -36,6 +37,9 @@ public final class RobberyGame extends JavaPlugin {
         if (robberyService != null) {
             robberyService.shutdown();
         }
+        if (commandRegistry != null) {
+            commandRegistry.shutdown();
+        }
         getLogger().info("RobberyGamePlugin has been disabled!");
     }
 
@@ -44,11 +48,8 @@ public final class RobberyGame extends JavaPlugin {
     }
 
     private void registerCommands() {
-        PluginCommand robberyCommand = getCommand("robberygame");
-        if (robberyCommand == null) {
-            getLogger().warning("Command 'robberygame' is not defined in plugin.yml.");
-            return;
-        }
-        robberyCommand.setExecutor(new RobberyCommand(robberyService));
+        commandRegistry = new WapiCommandRegistry(this);
+        commandRegistry.register(new RobberyCommand(robberyService));
+        commandRegistry.bind();
     }
 }
