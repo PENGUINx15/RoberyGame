@@ -24,6 +24,7 @@ RobberyTPLocation:
     Z: -10
 CurrencyMin: 500
 CurrencyMax: 2000
+DurationSeconds: 25
 
 Blocks:
   Material: DIAMOND_BLOCK
